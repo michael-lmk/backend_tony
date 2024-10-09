@@ -2,29 +2,33 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MusicService } from './music.service';
 import { CreateMusicDto } from './dto/create-music.dto';
 import { UpdateMusicDto } from './dto/update-music.dto';
+import { FileService } from '../file/file.service';
+import { createReadStream } from 'fs';
 
 @Controller('music')
 export class MusicController {
-  constructor(private readonly musicService: MusicService) {}
+  constructor(private readonly musicService: MusicService, private readonly fileService: FileService) { }
 
   @Post()
-  create(@Body() createMusicDto: CreateMusicDto) {
+  create(@Body() createMusicDto: any) {
     return this.musicService.create(createMusicDto);
   }
 
   @Get()
   findAll() {
-    return this.musicService.findAll();
+    return this.musicService.findAll()
   }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.musicService.findOne(+id);
+
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMusicDto: UpdateMusicDto) {
-    return this.musicService.update(+id, updateMusicDto);
+  update(@Body() updateMusicDto: UpdateMusicDto) {
+    return this.musicService.update(updateMusicDto);
   }
 
   @Delete(':id')
