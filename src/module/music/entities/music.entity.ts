@@ -1,6 +1,12 @@
-
 import { Category } from 'src/module/category/entities/category.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  UpdateDateColumn,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Music {
@@ -16,10 +22,10 @@ export class Music {
   @ManyToOne(() => Category)
   category: Category;
 
-  @Column()
+  @CreateDateColumn()
   date_insert: Date;
 
-  @Column()
+  @UpdateDateColumn()
   date_updated: Date;
 
   @Column()

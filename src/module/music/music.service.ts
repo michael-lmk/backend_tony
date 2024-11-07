@@ -15,14 +15,9 @@ export class MusicService {
     return this.musicRepository.save(createmusicDto)
   }
 
-  findAll() {
-    // this.fileService.getFilePath(fileName, type).then((path) => {
-
-    //   // const stream = createReadStream(path);
-    //   // res.contentType(type == 'mp3' ? `audio/${type}` : `images/${type}`);
-    //   // res.send(stream);
-    // })
-    return this.musicRepository.find({ relations: { category: true } });
+  findAll(params: any) {
+    console.log(params);
+    return this.musicRepository.find({ where: { category: { id: params.categoryId } }, relations: { category: true } });
   }
 
   findOne(id: number) {

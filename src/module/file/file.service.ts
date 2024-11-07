@@ -42,7 +42,6 @@ export class FileService {
 
     const regex = /^([A-Za-z0-9]{8})(\d{4})(\d{2})(\d{2})(\d{9}).(png|jpg|jpeg|mp3|wav)/g;
     const infoReg = [...fileName.matchAll(regex)];
-    console.log(infoReg);
 
     if (infoReg.length > 0) {
       const path = `public/${type}/${infoReg[0][2]}/${infoReg[0][3]}/${infoReg[0][4]}/${fileName}`;
@@ -59,7 +58,6 @@ export class FileService {
 
     const regex = /^([A-Za-z0-9]{8})(\d{4})(\d{2})(\d{2})(\d{9}).(png|jpg|jpeg|mp3|wav)/g;
     const infoReg = [...fileName.matchAll(regex)];
-    console.log(infoReg);
 
     if (infoReg.length > 0) {
       return `public/${type}/${infoReg[0][2]}/${infoReg[0][3]}/${infoReg[0][4]}/${fileName}`;

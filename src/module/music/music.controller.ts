@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { MusicService } from './music.service';
 import { CreateMusicDto } from './dto/create-music.dto';
 import { UpdateMusicDto } from './dto/update-music.dto';
@@ -15,8 +15,8 @@ export class MusicController {
   }
 
   @Get()
-  findAll() {
-    return this.musicService.findAll()
+  findAll(@Query() query: any) {
+    return this.musicService.findAll(query)
   }
 
 
