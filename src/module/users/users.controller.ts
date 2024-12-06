@@ -19,7 +19,9 @@ export class UsersController {
   @Post()
   async create(@Body() createUserDto: any) {
     try {
-      let alreadyExiste = await this.usersService.findOne({ email: createUserDto.email });
+      let alreadyExiste = await this.usersService.findOne({
+        email: createUserDto.email,
+      });
 
       if (alreadyExiste) {
         return { message: 'Email déjà utilisée.' };
@@ -51,8 +53,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  update(@Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(updateUserDto);
   }
 
   @Delete(':id')

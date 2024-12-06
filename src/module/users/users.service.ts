@@ -12,6 +12,8 @@ export class UsersService {
   ) {}
 
   create(createUserDto: any) {
+    console.log(createUserDto);
+
     return this.usersRepository.save(createUserDto);
   }
 
@@ -20,11 +22,16 @@ export class UsersService {
   }
 
   findOne(params: any) {
-    return this.usersRepository.findOne({ where: params });
+    return this.usersRepository.findOne({
+      where: params,
+      relations: { favories: true },
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(updateUserDto: UpdateUserDto) {
+    const preloadData = await this.usersRepository.preload(updateUserDto);
+
+    return this.usersRepository.save(preloadData);
   }
 
   remove(id: number) {

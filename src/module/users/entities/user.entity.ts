@@ -1,3 +1,4 @@
+import { Music } from 'src/module/music/entities/music.entity';
 import {
   Entity,
   Column,
@@ -5,6 +6,8 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity()
@@ -23,12 +26,16 @@ export class Users {
 
   @Column()
   password: string;
-  
+
   @Column()
   salt: string;
-  
+
   @Column()
   rank: number;
+
+  @ManyToMany(() => Music)
+  @JoinTable()
+  favories: Music;
 
   @CreateDateColumn()
   date_insert: Date;
