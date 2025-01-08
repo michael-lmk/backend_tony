@@ -7,21 +7,29 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class MusicService {
-  constructor(@InjectRepository(Music) private musicRepository: Repository<Music>) {
-
-  }
+  constructor(
+    @InjectRepository(Music) private musicRepository: Repository<Music>,
+  ) {}
 
   create(createmusicDto: any) {
-    return this.musicRepository.save(createmusicDto)
+    return this.musicRepository.save(createmusicDto);
   }
 
   findAll(params: any) {
-    console.log(params);
-    return this.musicRepository.find({ where: { category: { id: params.categoryId } }, relations: { category: true } });
+    return this.musicRepository.find({
+      where: { category: { id: params.categoryId } },
+      relations: { category: true },
+      skip: params.offset,
+      take: params.limit,
+      order: { id: 'DESC' },
+    });
   }
 
   findOne(id: number) {
-    return this.musicRepository.find({ where: { id: id }, relations: { category: true } });
+    return this.musicRepository.findOne({
+      where: { id: id },
+      relations: { category: true },
+    });
   }
 
   async update(updateMusicDto: any) {
@@ -30,6 +38,6 @@ export class MusicService {
   }
 
   remove(id: number) {
-    return this.musicRepository.delete(id)
+    return this.musicRepository.delete(id);
   }
 }

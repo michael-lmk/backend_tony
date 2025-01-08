@@ -39,34 +39,27 @@ export class FileService {
   }
 
   async read(fileName: string, type: string) {
-
-    const regex = /^([A-Za-z0-9]{8})(\d{4})(\d{2})(\d{2})(\d{9}).(png|jpg|jpeg|mp3|wav)/g;
+    const regex =
+      /^([A-Za-z0-9]{8})(\d{4})(\d{2})(\d{2})(\d{9}).(png|jpg|jpeg|mp3|wav)/g;
     const infoReg = [...fileName.matchAll(regex)];
 
     if (infoReg.length > 0) {
       const path = `public/${type}/${infoReg[0][2]}/${infoReg[0][3]}/${infoReg[0][4]}/${fileName}`;
-      return await fsPromises.readFile(path)
-
+      return await fsPromises.readFile(path);
     } else {
       throw 404;
     }
-
-
   }
 
   async getFilePath(fileName: string, type: string) {
-
-    const regex = /^([A-Za-z0-9]{8})(\d{4})(\d{2})(\d{2})(\d{9}).(png|jpg|jpeg|mp3|wav)/g;
+    const regex =
+      /^([A-Za-z0-9]{8})(\d{4})(\d{2})(\d{2})(\d{9}).(png|jpg|jpeg|mp3|wav)/g;
     const infoReg = [...fileName.matchAll(regex)];
 
     if (infoReg.length > 0) {
       return `public/${type}/${infoReg[0][2]}/${infoReg[0][3]}/${infoReg[0][4]}/${fileName}`;
-
-
     } else {
       throw 404;
     }
-
-
   }
 }
