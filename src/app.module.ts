@@ -9,6 +9,7 @@ import { FileModule } from './module/file/file.module';
 import { AuthModule } from './module/auth/auth.module';
 import { UsersModule } from './module/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
+import { DonationModule } from './module/donation/donation.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
@@ -17,6 +18,7 @@ import { JwtModule } from '@nestjs/jwt';
     FileModule,
     AuthModule,
     UsersModule,
+    DonationModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
